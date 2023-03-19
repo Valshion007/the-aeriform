@@ -1,0 +1,14 @@
+{
+	"id": "Aeriform",
+	"name": "The Aeriform",
+	"description": "goober with flight<LINE><LINE>this is a test.",
+	"features": {
+		"color": "e76963",
+		"aeriform/super_jump": 0.5,
+		"aeriform/explode_on_death": true,
+		"aeriform/mean_lizards": 0.8,
+
+		"select_menu_scene": "Slugcat_Aeriform",
+		"select_menu_scene_ascended": "Ghost_Aeriform"
+	}
+}

@@ -1,0 +1,9 @@
+﻿{
+	"id": "aeriform",
+	"name": "The Aeriform",
+	"version": "0.1.0",
+	"authors": "hootis, canariboo",
+	"description": "adds a new slug: the aeriform!",
+	"requirements": [ "slime-cubed.slugbase" ],
+	"requirements_names": [ "SlugBase" ]
+}
