@@ -1,0 +1,14 @@
+{
+	"id": "Aeriform",
+	"name": "The Aeriform",
+	"description": "This little critter has more in common with a bird.",
+	"features": {
+		"color": "e76963",
+		"start_room": "SI_S04",
+		"world_state": "Gourmand",
+		"has_dreams": false,
+
+		"select_menu_scene": "Slugcat_Aeriform",
+		"select_menu_scene_ascended": "Slugcat_Aeriform"
+	}
+}
