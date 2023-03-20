@@ -5,7 +5,10 @@
 		{ "name": "Background", "pos": [492, 297], "depth": 3.7, "shader": "Basic" },
 		{ "name": "sky-cicle",    "pos": [470, 400], "depth": 3.2, "shader": "Basic" },
 		{ "name": "sky-cicle",    "pos": [800, 350], "depth": 3.2, "shader": "Basic" },
-		{ "name": "Slugcat",    "pos": [500, 400], "depth": 2.8, "shader": "Basic" }
+		{ "name": "Slugcat",    "pos": [500, 400], "depth": 2.8, "shader": "Basic" },
+		{ "name": "Grass 3",    "pos": [602, 264], "depth": 3.0, "shader": "Basic" },
+        { "name": "Grass 2",    "pos": [446, 283], "depth": 2.4, "shader": "Basic" },
+        { "name": "Grass 1",    "pos": [515, 285], "depth": 1.8, "shader": "Basic" }
 	],
 	"idle_depths": [ 2.8 ],
 	"glow_pos": [688, 484],
