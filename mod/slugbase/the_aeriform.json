@@ -7,6 +7,8 @@
 		"start_room": "SI_S04",
 		"world_state": "Gourmand",
 		"has_dreams": false,
+		"walk_speed": 1.8,
+		"climb_speed": 1.8,
 
 		"select_menu_scene": "Slugcat_Aeriform",
 		"select_menu_scene_ascended": "Slugcat_Aeriform"

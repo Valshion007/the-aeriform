@@ -26,8 +26,8 @@ namespace SlugTemplate
             // Put your custom hooks here!
             //On.Player.Jump += PlayerJumpHook;
             On.Player.Update += PlayerUpdateHook;
-            On.Player.Die += PlayerDieHook;
-            On.Player.MovementUpdate += MovementHook;
+            //On.Player.Die += PlayerDieHook;
+            //On.Player.MovementUpdate += MovementHook;
             On.Player.TerrainImpact += LevelCollisionHook;
         }
         
@@ -51,7 +51,7 @@ namespace SlugTemplate
                 }
             }
 
-            if (airTime > 200)
+            if (airTime > 50)
             {
                 canFly = false;
             }
@@ -61,8 +61,10 @@ namespace SlugTemplate
         {
             orig(self, chunk, direction, speed, firstContact);
             canFly = true;
+            airTime = 0;
         }
-
+        //no clue what im using this for. comming.
+        /*
         private void PlayerDieHook(On.Player.orig_Die orig, Player self)
         {
             orig(self);
