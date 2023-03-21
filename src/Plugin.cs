@@ -11,6 +11,7 @@ namespace SlugTemplate
     class Plugin : BaseUnityPlugin
     {
         private const string MOD_ID = "aeriform";
+        private bool inAir = false;
 
         // Add hooks
         public void OnEnable()
@@ -18,7 +19,9 @@ namespace SlugTemplate
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 
             // Put your custom hooks here!
-            On.Player.Jump += Player_Jump;
+            //On.Player.Jump += PlayerJumpHook;
+            On.Player.Update += PlayerUpdateHook;
+            On.Player.Die += PlayerDieHook;
         }
         
         // Load any resources, such as sprites or sounds
@@ -27,10 +30,35 @@ namespace SlugTemplate
 
         }
 
-        // Implement Flight
-        private void Player_Jump(On.Player.orig_Jump orig, Player self)
+        // Flight Code
+        private void PlayerUpdateHook(On.Player.orig_Update orig, Player self, bool eu)
+        {
+            orig(self, eu);
+
+            if (self.input[0].y > 0)
+            {
+                self.Jump();
+            }
+        }
+
+        private void PlayerDieHook(On.Player.orig_Die orig, Player self)
         {
             orig(self);
         }
+
+        // Implement Flight (old method)
+        /*
+        private void PlayerJumpHook(On.Player.orig_Jump orig, Player self)
+        {
+            orig(self);
+            inAir = true;
+        }
+        
+        private void PlayerCollideHook(On.Player.orig_Collide orig, Player self, bool eu)
+        {
+            orig(self, eu);
+            inAir = false;
+        }
+        */
     }
 }
