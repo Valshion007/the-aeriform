@@ -13,6 +13,7 @@ namespace SlugTemplate
     [BepInPlugin(MOD_ID, "The Aeriform", "0.1.0")]
     class Plugin : BaseUnityPlugin
     {
+        FAtlas atlas;
         private const string MOD_ID = "aeriform";
         private float airTime = 0f;
         //private bool grabbingPole = false;
@@ -30,12 +31,39 @@ namespace SlugTemplate
             //On.Player.MovementUpdate += MovementHook;
             On.Player.TerrainImpact += Player_TerrainImpact;
             On.Player.GrabVerticalPole += Player_GrabVerticalPole;
+
+            //Visuals Init
+            On.RainWorld.OnModsInit += Init;
+            On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
         }
         
         // Load any resources, such as sprites or sounds
         private void LoadResources(RainWorld rainWorld)
         {
 
+        }
+
+        private void Init(On.RainWorld.orig_OnModsInit orig, RainWorld self)
+        {
+            orig(self);
+
+            atlas ??= Futile.atlasManager.LoadAtlas("sprites/aerihead");
+        }
+
+        private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
+        {
+            orig(self, sLeaser, rCam, timeStacker, camPos);
+
+            if (atlas == null)
+            {
+                return;
+            }
+
+            string name = sLeaser.sprites[3]?.element?.name;
+            if (name != null && name.StartsWith("HeadA") && atlas._elementsByName.TryGetValue("Aeri" + name, out var element))
+            {
+                sLeaser.sprites[3].element = element;
+            }
         }
 
         // Flight Code
