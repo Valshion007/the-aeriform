@@ -25,10 +25,11 @@ namespace SlugTemplate
 
             // Put your custom hooks here!
             //On.Player.Jump += PlayerJumpHook;
-            On.Player.Update += PlayerUpdateHook;
+            On.Player.Update += Player_Update;
             //On.Player.Die += PlayerDieHook;
             //On.Player.MovementUpdate += MovementHook;
-            On.Player.TerrainImpact += LevelCollisionHook;
+            On.Player.TerrainImpact += Player_TerrainImpact;
+            On.Player.GrabVerticalPole += Player_GrabVerticalPole;
         }
         
         // Load any resources, such as sprites or sounds
@@ -38,7 +39,7 @@ namespace SlugTemplate
         }
 
         // Flight Code
-        private void PlayerUpdateHook(On.Player.orig_Update orig, Player self, bool eu)
+        private void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
         {
             orig(self, eu);
             
@@ -57,7 +58,13 @@ namespace SlugTemplate
             }
         }
 
-        private void LevelCollisionHook(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
+        private void Player_GrabVerticalPole(On.Player.orig_GrabVerticalPole orig, Player self)
+        {
+            orig(self);
+            canFly = false;
+        }
+
+        private void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
         {
             orig(self, chunk, direction, speed, firstContact);
             canFly = true;
