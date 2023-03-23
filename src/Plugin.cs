@@ -41,7 +41,7 @@ namespace SlugTemplate
         // Load any resources, such as sprites or sounds
         private void LoadResources(RainWorld rainWorld)
         {
-
+            Futile.atlasManager.LoadAtlas("sprites/sunhat");
         }
 
         private void Init(On.RainWorld.orig_OnModsInit orig, RainWorld self)
@@ -59,7 +59,6 @@ namespace SlugTemplate
             {
                 return;
             }
-            /* fuck you
             if (aeri == 1)
             {
                 string name = sLeaser.sprites[3]?.element?.name;
@@ -68,7 +67,6 @@ namespace SlugTemplate
                     sLeaser.sprites[3].element = element;
                 }
             }
-            */
         }
 
         // Flight Code
