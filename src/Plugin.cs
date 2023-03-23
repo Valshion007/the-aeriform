@@ -81,7 +81,7 @@ namespace SlugTemplate
                     if (canFly)
                     {
                         //self.Jump();
-                        self.mainBodyChunk.vel.y += 2f;
+                        self.mainBodyChunk.vel.y += 1.5f;
                         airTime++;
                     }
 
@@ -104,6 +104,7 @@ namespace SlugTemplate
         {
             orig(self);
             canFly = true;
+            airTime = 0;
         }
 
         private void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
