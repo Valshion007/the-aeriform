@@ -47,8 +47,15 @@ namespace SlugTemplate
         private void Init(On.RainWorld.orig_OnModsInit orig, RainWorld self)
         {
             orig(self);
-
-            atlas ??= Futile.atlasManager.LoadAtlas("sprites/sunhat");
+            try
+            {
+                atlas ??= Futile.atlasManager.LoadAtlas("sprites/sunhat");
+            }
+            catch (InvalidCastException)
+            {
+                // god damn, you really have to remember to put this here huh
+                Logger.LogWarning("disable 'the aeriform', i fucked something up.");
+            }
         }
 
         private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
