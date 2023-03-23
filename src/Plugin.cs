@@ -59,6 +59,7 @@ namespace SlugTemplate
             {
                 return;
             }
+            /* fuck you
             if (aeri == 1)
             {
                 string name = sLeaser.sprites[3]?.element?.name;
@@ -67,6 +68,7 @@ namespace SlugTemplate
                     sLeaser.sprites[3].element = element;
                 }
             }
+            */
         }
 
         // Flight Code
