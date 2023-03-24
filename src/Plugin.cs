@@ -19,29 +19,22 @@ namespace SlugTemplate
         //private bool grabbingPole = false;
         private bool canFly = false;
 
-        private float aeri = 0;
+        private bool aeri = false;
 
-        static readonly PlayerFeature<float> AeriEnable = PlayerFloat("aeri_enable");
+        static readonly PlayerFeature<bool> AeriEnable = PlayerBool("aeri_enable");
 
         // Add hooks
         public void OnEnable()
         {
-            On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
-
             // hooks
             On.Player.Update += Player_Update;
             On.Player.TerrainImpact += Player_TerrainImpact;
             On.Player.GrabVerticalPole += Player_GrabVerticalPole;
+            On.Player.WallJump += Player_WallJump;
 
             // visuals init
             On.RainWorld.OnModsInit += Init;
             On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
-        }
-        
-        // Load any resources, such as sprites or sounds
-        private void LoadResources(RainWorld rainWorld)
-        {
-            Futile.atlasManager.LoadAtlas("sprites/sunhat");
         }
 
         private void Init(On.RainWorld.orig_OnModsInit orig, RainWorld self)
@@ -54,7 +47,7 @@ namespace SlugTemplate
             catch (InvalidCastException)
             {
                 // god damn, you really have to remember to put this here huh
-                Logger.LogWarning("disable 'the aeriform', i fucked something up.");
+                Logger.LogWarning("fuck");
             }
         }
 
@@ -66,7 +59,7 @@ namespace SlugTemplate
             {
                 return;
             }
-            if (aeri == 1)
+            if (aeri)
             {
                 string name = sLeaser.sprites[3]?.element?.name;
                 if (name != null && name.StartsWith("HeadA") && atlas._elementsByName.TryGetValue("Sun" + name, out var element))
@@ -88,7 +81,7 @@ namespace SlugTemplate
                     if (canFly)
                     {
                         //self.Jump();
-                        self.mainBodyChunk.vel.y += 1.5f;
+                        self.mainBodyChunk.vel.y += 2.3f;
                         airTime++;
                     }
 
@@ -105,6 +98,12 @@ namespace SlugTemplate
 
                 aeri = aerienable;
             }
+        }
+
+        private void Player_WallJump(On.Player.orig_WallJump orig, Player self, int direction)
+        {
+            orig(self, direction);
+            self.animation = Player.AnimationIndex.Flip;
         }
 
         private void Player_GrabVerticalPole(On.Player.orig_GrabVerticalPole orig, Player self)

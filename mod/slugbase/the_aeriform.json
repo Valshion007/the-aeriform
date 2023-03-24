@@ -9,7 +9,7 @@
 		"has_dreams": false,
 		"walk_speed": 1.8,
 		"climb_speed": 1.8,
-		"aeri_enable":  1,
+		"aeri_enable":  true,
 
 		"select_menu_scene": "Slugcat_Aeriform",
 		"select_menu_scene_ascended": "Slugcat_Aeriform"
