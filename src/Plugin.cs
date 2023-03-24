@@ -47,7 +47,7 @@ namespace SlugTemplate
             catch (InvalidCastException)
             {
                 // god damn, you really have to remember to put this here huh
-                Logger.LogWarning("fuck");
+                Logger.LogWarning("damnit");
             }
         }
 
