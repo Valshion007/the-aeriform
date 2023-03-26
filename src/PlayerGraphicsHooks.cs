@@ -8,5 +8,9 @@ namespace Aeriform
 {
     internal class PlayerGraphicsHooks
     {
+        public static void Init()
+        {
+
+        }
     }
 }
