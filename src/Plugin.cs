@@ -55,7 +55,8 @@ namespace SlugTemplate
 
                 atlas ??= Futile.atlasManager.LoadAtlas("sprites/sunhat");
 
-                PlayerGraphicsHooks.Init();
+                PlayerVisualHooks.Init();
+                GameplayHooks.Init();
 
                 Debug.Log($"Plugin Aeriform is loaded!");
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aeriform
 {
-    internal class PlayerGraphicsHooks
+    internal class GameplayHooks
     {
         public static void Init()
         {
