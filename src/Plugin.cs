@@ -7,6 +7,7 @@ using MoreSlugcats;
 using IL.RWCustom;
 using RWCustom;
 using System.Diagnostics.Eventing.Reader;
+using Aeriform;
 
 namespace SlugTemplate
 {
@@ -19,9 +20,13 @@ namespace SlugTemplate
         //private bool grabbingPole = false;
         private bool canFly = false;
 
+        private bool isInit = false;
+
         private bool aeri = false;
 
         static readonly PlayerFeature<bool> AeriEnable = PlayerBool("aeri_enable");
+
+        private UpdatableAndDeletable wings;
 
         // Add hooks
         public void OnEnable()
@@ -35,6 +40,7 @@ namespace SlugTemplate
             // visuals init
             On.RainWorld.OnModsInit += Init;
             On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
+            On.PlayerGraphics.ctor += PlayerGraphics_Ctor;
         }
 
         private void Init(On.RainWorld.orig_OnModsInit orig, RainWorld self)
@@ -42,31 +48,28 @@ namespace SlugTemplate
             orig(self);
             try
             {
+                if (isInit) return;
+                isInit = true;
+
+                Futile.atlasManager.LoadAtlas("sprites/wings/wingsatlas");
+
                 atlas ??= Futile.atlasManager.LoadAtlas("sprites/sunhat");
+
+                PlayerGraphicsHooks.Init();
+
+                Debug.Log($"Plugin Aeriform is loaded!");
             }
             catch (InvalidCastException)
             {
                 // god damn, you really have to remember to put this here huh
                 Logger.LogWarning("damnit");
+                throw;
             }
         }
 
         private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, UnityEngine.Vector2 camPos)
         {
             orig(self, sLeaser, rCam, timeStacker, camPos);
-
-            if (atlas == null)
-            {
-                return;
-            }
-            if (aeri)
-            {
-                string name = sLeaser.sprites[3]?.element?.name;
-                if (name != null && name.StartsWith("HeadA") && atlas._elementsByName.TryGetValue("Sun" + name, out var element))
-                {
-                    sLeaser.sprites[3].element = element;
-                }
-            }
         }
 
         // Flight Code
@@ -97,6 +100,8 @@ namespace SlugTemplate
                 }
 
                 aeri = aerienable;
+
+                self.room.AddObject(wings);
             }
         }
 
@@ -118,6 +123,13 @@ namespace SlugTemplate
             orig(self, chunk, direction, speed, firstContact);
             canFly = true;
             airTime = 0;
+        }
+
+        // visuals
+
+        private void PlayerGraphics_Ctor(On.PlayerGraphics.orig_ctor orig, PlayerGraphics self, PhysicalObject ow)
+        {
+            orig(self, ow);
         }
     }
 }
