@@ -8,7 +8,7 @@ namespace Aeriform
 {
     internal class PlayerVisualHooks
     {
-        public static void Init()
+        public void Init()
         {
 
         }
