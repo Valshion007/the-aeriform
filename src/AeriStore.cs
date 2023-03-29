@@ -11,15 +11,17 @@ using Aeriform;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using SlugBase;
+#
 
 namespace Aeriform
 {
     internal class AeriStore
     {
-        public bool aeri;
+        public float aeri;
         public static readonly float flightMax = 50f;
 
-        static readonly PlayerFeature<bool> AeriEnabled = PlayerBool("aeri_enable");
+        static readonly PlayerFeature<float> AeriEnabled = PlayerFloat("aeri_enable");
+
         public void Init()
         {
             On.Player.Update += (orig, player, eu) =>

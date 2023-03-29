@@ -31,11 +31,9 @@ namespace SlugTemplate
         {
             orig(self);
 
-            GameplayHooks gameplayhooks;
-            gameplayhooks = new GameplayHooks();
-
-            PlayerVisualHooks playervisualhooks;
-            playervisualhooks = new PlayerVisualHooks();
+            GameplayHooks gameplayhooks = new GameplayHooks();
+            PlayerVisualHooks playervisualhooks = new PlayerVisualHooks();
+            AeriStore aeristore = new AeriStore();
 
             try
             {
